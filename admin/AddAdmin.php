@@ -1,14 +1,13 @@
 <?php
+error_reporting(0);
 //include Import File && and if the user not admin Redirect to Home=>Public Area
     require '../include/temp/connect.php';
     session_start();
-       if(!$_SESSION['admin']==1)
+       if(!isset($_SESSION['admin']) || !$_SESSION['admin']==1)
             {
-                header('location:../public/Home.php?page=Home');
+                header('location:../login.php');
             }
     require '../include/temp/func.php';
-    require '../include/temp/header.php';
-    require '../include/temp/admindashbord.php';
     //define var for error handling
         $nameerror="";
 		$emailerror="";
@@ -43,8 +42,8 @@
 									{
                                         $counter="INSERT INTO `count`(`admin`) VALUES (1)";
                                         $result=mysqli_query($con,$counter);
+                                        header('REFRESH:3;URL=adminarea.php?page=AdminArea');
 										echo "<p class='failed fixed-top' style='background-color: #76C04E;'>Admin add success</p><div style='padding-top: 25px;'></div> ";
-										header('REFRESH:3;URL=adminarea.php?page=AdminArea');
 									}
 								else
 									{
@@ -67,6 +66,8 @@
                             }
                     }
             }
+            require '../include/temp/header.php';
+            require '../include/temp/admindashbord.php';
 		//Html Form With Error Handling
 ?>
     <form class="form-signin text-center d-block" action="<?php echo $_SERVER['PHP_SELF'];?>?page=AddAdmin" method="POST">

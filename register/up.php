@@ -4,19 +4,7 @@ error_reporting(0);
 	include '../include/temp/connect.php';
     session_start();
     require '../include/temp/func.php';
-
-?>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>Sign Up</title>
-		<link rel="stylesheet" href="../layout/css/bootstrap.min.css" />
-        <link rel="stylesheet" href= "../layout/css/ion.css">
-
-    </head>
-    <body>
-	<?php
-	//define var for error handling
+    	//define var for error handling
         $nameerror="";
 		$emailerror="";
         $usererror="";
@@ -50,8 +38,9 @@ error_reporting(0);
 									{
 										$counter="INSERT INTO `count`(`user`) VALUES (1)";
 										$result=mysqli_query($con,$counter);
+										header('REFRESH:3;URL=../login.php');
 										echo "<p class='failed fixed-top' style='background-color: #76C04E;'>Sign up success please login to verify your Account</p> ";
-										header('REFRESH:5;URL=../login.php');
+										
 									}
 								else
 									{
@@ -74,6 +63,18 @@ error_reporting(0);
                             }
                     }
             }
+
+?>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Sign Up</title>
+		<link rel="stylesheet" href="../layout/css/bootstrap.min.css" />
+        <link rel="stylesheet" href= "../layout/css/ion.css">
+
+    </head>
+    <body>
+	<?php
 		//Html Form With Error Handling
 	?>
 		<form class="form-signin text-center d-block" action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">

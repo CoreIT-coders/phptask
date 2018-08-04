@@ -1,12 +1,11 @@
 <?php
+error_reporting(0);
 //include Import File && and if the user not admin Redirect to Home=>Public Area
     require '../include/temp/connect.php';
     require '../include/temp/func.php';
     session_start();
        if(!$_SESSION['admin']==1)
             {
-                require '../include/temp/header.php';
-                require '../include/temp/navbar.php';
                     //check the Request method
                     if($_SERVER['REQUEST_METHOD']=='POST')
                         {
@@ -38,8 +37,8 @@
                                                     {
                                                         $_SESSION['username']=$user;
                                                         $_SESSION['email']   =$email;
+                                                        header('REFRESH:3;URL=../public/Home.php?page=Home');
                                                         echo "<p class='failed fixed-top' style='background-color: #76C04E;'>information change with password</p><div style='padding-top: 25px;'></div> ";
-                                                        header('REFRESH:3;URL=adminarea.php?page=AdminArea');
                                                     }
                                                 else
                                                     {
@@ -63,8 +62,8 @@
                                                     {
                                                         $_SESSION['username']=$user;
                                                         $_SESSION['email']   =$email;
+                                                        header('REFRESH:3;URL=../public/Home.php?page=Home');
                                                         echo "<p class='failed fixed-top' style='background-color: #76C04E;'>information change BUT password not change</p><div style='padding-top: 25px;'></div> ";
-                                                        header('REFRESH:3;URL=adminarea.php?page=AdminArea');
                                                     }
                                                 else
                                                     {
@@ -81,6 +80,8 @@
                                         }
                                 }
                         }
+                    require '../include/temp/header.php';
+                    require '../include/temp/navbar.php';
                     $select="SELECT * FROM `user` WHERE `email`='".$_SESSION['email']."' LIMIT 1";
                     $res=mysqli_query($con,$select);
                     $row=mysqli_fetch_assoc($res);
@@ -107,8 +108,6 @@
             }
         else
         {
-            require '../include/temp/header.php';
-            require '../include/temp/admindashbord.php';
             //check the Request method
             if($_SERVER['REQUEST_METHOD']=='POST')
             {
@@ -140,8 +139,8 @@
                                         {
                                             $_SESSION['username']=$user;
 											$_SESSION['email']   =$email;
+											header('REFRESH:3;URL=adminarea.php?page=AdminArea');
                                             echo "<p class='failed fixed-top' style='background-color: #76C04E;'>information change with password</p><div style='padding-top: 25px;'></div> ";
-                                            header('REFRESH:3;URL=adminarea.php?page=AdminArea');
                                         }
                                     else
                                         {
@@ -165,8 +164,8 @@
                                         {
                                             $_SESSION['username']=$user;
 											$_SESSION['email']   =$email;
+											header('REFRESH:3;URL=adminarea.php?page=AdminArea');
                                             echo "<p class='failed fixed-top' style='background-color: #76C04E;'>information change BUT password not change</p><div style='padding-top: 25px;'></div> ";
-                                            header('REFRESH:3;URL=adminarea.php?page=AdminArea');
                                         }
                                     else
                                         {
@@ -183,6 +182,8 @@
                             }
                     }
             }
+        require '../include/temp/header.php';
+        require '../include/temp/admindashbord.php';
         $select="SELECT * FROM `user` WHERE `email`='".$_SESSION['email']."' LIMIT 1";
         $res=mysqli_query($con,$select);
         $row=mysqli_fetch_assoc($res);

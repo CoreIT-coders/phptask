@@ -3,22 +3,15 @@
 error_reporting(0);
 include 'include/temp/connect.php';
     session_start();
+        if(isset($_SESSION['username']) && isset($_SESSION['email']))
+        {
+            
+        }
     require 'include/temp/func.php';
-
-?>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>Sign In</title>
-		<link rel="stylesheet" href="layout/css/bootstrap.min.css" />
-        <link rel="stylesheet" href= "layout/css/ion.css">
-	
-    </head>
-    <body>
-	<?php
-	//define var for error handling
+    	//define var for error handling
 		$emailerror="";
 		$passerror ="";
+		$flag='false';
 		//check the Request method
 		if($_SERVER['REQUEST_METHOD']=='POST')
 		{
@@ -46,8 +39,8 @@ include 'include/temp/connect.php';
 											$_SESSION['username']=$row['username'];
 											$_SESSION['email']   =$row['email'];
 											$_SESSION['admin']   =$row['admin'];
-											echo "<p class='failed fixed-top' style='background-color: #76C04E;'>Login succes </p> ";
-											header('REFRESH:1;URL=public/home.php?page=Home');				
+										    header('location:../public/Home.php?page=Home');
+											exit;
 										}
 									//value insert by user is incorrect
 									else
@@ -66,7 +59,19 @@ include 'include/temp/connect.php';
 					if(!empty($_POST['email']))
 					echo "<p class='failed fixed-top'>Login failed </p> ";
 				}
+			
 		}
+?>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Sign In</title>
+		<link rel="stylesheet" href="layout/css/bootstrap.min.css" />
+        <link rel="stylesheet" href= "layout/css/ion.css">
+	
+    </head>
+    <body>
+	<?php
 		//Html Form With Error Handling
     ?>
 		<form class="form-signin text-center d-block" action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
@@ -88,6 +93,7 @@ include 'include/temp/connect.php';
 </html>
 
 <?php
+
 	mysqli_close($con);
 
 ?>

@@ -1,9 +1,12 @@
 <?php
+error_reporting(0);
 //include Import File
     require '../include/temp/connect.php';
     session_start();
-    require '../include/temp/header.php';
-    require '../include/temp/navbar.php';
+            if(empty($_SESSION['username']) && empty($_SESSION['email']))
+            {
+                header('location:../login.php');
+            }
     require '../include/temp/func.php';
     //define var for error handling
     $nameerror="";
@@ -29,8 +32,9 @@
             VALUES ('".$_SESSION['username']."','".$name."','".$disease."','".$state."','".$birthdate."')";
             if(mysqli_query($con,$insert))
             {
-				$counter="INSERT INTO `count`(`patient`) VALUES (-1)";
+				$counter="INSERT INTO `count`(`patient`) VALUES (1)";
                 mysqli_query($con,$counter);
+                header('REFRESH:2;URL=../public/Home.php?page=Home');
 ?>				
 			<div class="container alert alert-success text-center" role="alert">
 			  <h4 class="alert-heading">Add New Pation</h4>
@@ -38,7 +42,6 @@
 			  <p class="mb-0">One Record Add Thank you</p>
 			</div>
 <?php
-                header('REFRESH:2;URL=../public/home.php?page=Home');
             }
         
         //if the information Dose not validate
@@ -55,6 +58,8 @@
                 }
         }
     }
+        require '../include/temp/header.php';
+        require '../include/temp/navbar.php';
 ?>
 
 <div class="container">

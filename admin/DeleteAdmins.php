@@ -6,14 +6,15 @@
             {
                 header('location:../public/Home.php?page=Home');
             }
-    require '../include/temp/header.php';
     require '../include/temp/func.php';
     //view the massage that return from the delete submit
     if(isset($_GET['delete']))
         {
+            header('REFRESH:3;URL=adminarea.php?page=AdminArea');
             echo $_SESSION['delete'];
         }
     $_SESSION['delete']="";
+    require '../include/temp/header.php';
     require '../include/temp/admindashbord.php';
                 //view the Admin in table with there information to delete them
 ?>

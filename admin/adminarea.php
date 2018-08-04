@@ -1,10 +1,11 @@
 <?php
+error_reporting(0);
 //include Import File && and if the user not admin Redirect to Home=>Public Area
     require '../include/temp/connect.php';
     session_start();
-       if(!$_SESSION['admin']==1)
+       if(!isset($_SESSION['admin']) || !$_SESSION['admin']==1)
             {
-                header('location:../public/Home.php?page=Home');
+                header('location:../login.php');
             }
     require '../include/temp/header.php';
     require '../include/temp/func.php';

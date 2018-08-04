@@ -1,5 +1,5 @@
 <?php
-    //error_reporting(0);
+    error_reporting(0);
     include '../include/temp/connect.php';
     session_start();
     require '../include/temp/func.php';
@@ -50,7 +50,7 @@
                   
             </body>
     </html>
-
+<div class='clearfix'></div>
 <?php
 	mysqli_close($con);
 

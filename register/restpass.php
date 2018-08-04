@@ -1,5 +1,5 @@
 <?php
-    //error_reporting(0);
+    error_reporting(0);
     include '../include/temp/connect.php';
     session_start();
      if(!isset($_SESSION['email']))
@@ -31,8 +31,8 @@
                             AND `username`='".$username."'";
 							if(mysqli_query($con,$sql))
 								{
+								    header('REFRESH:3;URL=../login.php');
 									echo "<p class='failed fixed-top' style='background-color: #76C04E;'>Your Password change Login again to confirm it</p> ";
-									header('REFRESH:4;URL=../login.php');
 								}
 							else
 								{
